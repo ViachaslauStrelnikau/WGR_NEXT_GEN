@@ -1,6 +1,7 @@
 package com.example.WGR_hibernate6.model;
 
 import com.example.WGR_hibernate6.commons.UserFlag;
+import com.example.WGR_hibernate6.model.cimsmgs.CimSmgs;
 import com.example.WGR_hibernate6.model.smgsfiles.CimSmgsFileInf;
 import com.example.WGR_hibernate6.model.smgsinvoice.CimSmgsInvoice;
 import jakarta.persistence.*;
@@ -47,13 +48,14 @@ public class PackDoc implements Serializable {
 //	private Set<Avto> avtos = new HashSet<Avto>();
 //	private Set<AvtoZayav> avtoZayavs = new HashSet<>();
 //	private Set<PoezdZayav> zayavs = new HashSet<>();
-//    private Set<CimSmgs> cimSmgses = new HashSet<CimSmgs>(0);
+    @OneToMany(mappedBy = "packDoc")
+    private Set<CimSmgs> cimSmgses = new HashSet<>(0);
 
     @OneToMany(mappedBy = "packDoc")
     private Set<CimSmgsInvoice> csInvoices = new HashSet<>(0);
 
     @OneToMany(mappedBy = "packDoc")
-    private Set<CimSmgsFileInf> cimSmgsFileInfs = new HashSet<CimSmgsFileInf>(0);
+    private Set<CimSmgsFileInf> cimSmgsFileInfs = new HashSet<>(0);
 //    private Set<AltaPack> altaPacks = new HashSet<>(0);
 //
 //    public Set<AltaPack> getAltaPacks() {
@@ -158,14 +160,14 @@ public class PackDoc implements Serializable {
         this.tbc_nomer = tbc_nomer;
     }
 
-//    public Set<CimSmgsFileInf> getCimSmgsFileInfs() {
-//        return cimSmgsFileInfs;
-//    }
-//
-//    public void setCimSmgsFileInfs(Set<CimSmgsFileInf> cimSmgsFileInfs) {
-//        this.cimSmgsFileInfs = cimSmgsFileInfs;
-//    }
-//
+    public Set<CimSmgsFileInf> getCimSmgsFileInfs() {
+        return cimSmgsFileInfs;
+    }
+
+    public void setCimSmgsFileInfs(Set<CimSmgsFileInf> cimSmgsFileInfs) {
+        this.cimSmgsFileInfs = cimSmgsFileInfs;
+    }
+
 
     public UsrGroupsDir getUsrGroupsDir() {
         return usrGroupsDir;
@@ -206,14 +208,14 @@ public class PackDoc implements Serializable {
         this.route = route;
     }
 
-    //    public Set<CimSmgs> getCimSmgses() {
-//        return this.cimSmgses;
-//    }
-//
-//    public void setCimSmgses(Set<CimSmgs> cimSmgses) {
-//        this.cimSmgses = cimSmgses;
-//    }
-//
+        public Set<CimSmgs> getCimSmgses() {
+        return this.cimSmgses;
+    }
+
+    public void setCimSmgses(Set<CimSmgs> cimSmgses) {
+        this.cimSmgses = cimSmgses;
+    }
+
     public Set<CimSmgsInvoice> getCsInvoices() {
         return this.csInvoices;
     }

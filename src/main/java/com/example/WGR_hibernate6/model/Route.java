@@ -2,7 +2,6 @@ package com.example.WGR_hibernate6.model;
 
 import jakarta.persistence.*;
 import org.hibernate.annotations.Parameter;
-import org.hibernate.annotations.Parent;
 
 import java.util.*;
 
@@ -46,14 +45,14 @@ public class Route {
     @JoinColumn(name = "HID_ROUTE")
     private Set<RouteGraph> bindedRoutes = new HashSet<>();
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "route_groups",
             joinColumns = @JoinColumn(name = "HID_ROUTE"),
             inverseJoinColumns = @JoinColumn(name = "GROUP_ID")
     )
     private Set<UsrGroupsDir> routeGroupses = new HashSet<>();
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "route_doc",
             joinColumns = @JoinColumn(name = "HID_ROUTE"),
             inverseJoinColumns = @JoinColumn(name = "HID_DDIR")

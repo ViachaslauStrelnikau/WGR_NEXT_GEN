@@ -27,6 +27,7 @@ class PackDocRepositoryTest {
         for (PackDoc packDoc : packDocs) {
             System.out.println("Invoices: " +packDoc.getCsInvoices().size());
             System.out.println("Status: " +packDoc.getStatuses().size());
+            System.out.println("Smgss: " +packDoc.getCimSmgses().size());
         }
     }
 
