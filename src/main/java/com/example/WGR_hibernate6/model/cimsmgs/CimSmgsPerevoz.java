@@ -1,7 +1,9 @@
 package com.example.WGR_hibernate6.model.cimsmgs;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Max;
 import org.hibernate.annotations.Parameter;
+import org.hibernate.validator.constraints.Length;
 
 import java.io.Serializable;
 import java.util.Objects;
@@ -23,14 +25,32 @@ public class CimSmgsPerevoz implements Serializable {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "HID_CS")
     private CimSmgs cimSmgs;
+    @Column(name = "SORT",precision = 2)
+    @Max(99)
     private Byte sort;
+    @Column(name = "NAME_PER")
+    @Length(max = 80)
     private String namPer;
+    @Column(name = "ST_BEG")
+    @Length(max = 48)
     private String stBeg;
+    @Column(name = "ST_END")
+    @Length(max = 48)
     private String stEnd;
+    @Column(name = "COD_ST_BEG")
+    @Length(max = 6)
     private String codStBeg;
+    @Column(name = "COD_ST_END")
+    @Length(max = 6)
     private String codStEnd;
+    @Column(name = "ADM_ST_BEG")
+    @Length(max = 2)
     private String admStBeg;
+    @Column(name = "ADM_ST_END")
+    @Length(max = 2)
     private String admStEnd;
+    @Column(name = "CODE_PER")
+    @Length(max = 4)
     private String codePer;
 
     public String getCodStEnd() {

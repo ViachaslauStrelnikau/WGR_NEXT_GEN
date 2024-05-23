@@ -34,6 +34,8 @@ class PackDocRepositoryTest {
                 System.out.println("Docses9"+smgs.getCimSmgsDocses9().size());
                 System.out.println("Docses13"+smgs.getCimSmgsDocses13().size());
                 System.out.println("Docses136"+smgs.getCimSmgsDocses136().size());
+                System.out.println("Perevoz"+smgs.getCimSmgsPerevoz().size());
+                System.out.println("Platels"+smgs.getCimSmgsPlatels().size());
 
                 System.out.println("carLists : " + smgs.getCimSmgsCarLists().size());
                 for (CimSmgsCarList carList : smgs.getCimSmgsCarLists().values()) {

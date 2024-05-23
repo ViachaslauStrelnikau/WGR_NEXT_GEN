@@ -2,8 +2,10 @@ package com.example.WGR_hibernate6.model.cimsmgs;
 
 
 import jakarta.persistence.*;
-import org.hibernate.annotations.CreationTimestamp;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.NotNull;
 import org.hibernate.annotations.Parameter;
+import org.hibernate.validator.constraints.Length;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -26,28 +28,62 @@ public class CimSmgsPlatel implements Serializable {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "HID_CS")
 	private CimSmgs cimSmgs;
+	@Column(name = "DOR")
+	@Length(max = 5)
 	private String dor;
+	@Column(name = "PLAT")
+	@Length(max = 45)
 	private String plat;
+	@Column(name = "PRIM")
+	@Length(max = 400)
 	private String prim;
-	@CreationTimestamp
-	private Date dattr;
-	private Date locked;
-	private String unLock;
+	@Column(name = "SORT",precision = 2)
+	@NotNull
+	@Max(99)
 	private Byte sort;
+	@Column(name = "KPLAT")
+	@Length(max = 50)
 	private String kplat;
+	@Column(name = "KPLAT1")
+	@Length(max = 50)
 	private String kplat1;
+	@Column(name = "KPLAT2")
+	@Length(max = 50)
 	private String kplat2;
+	@Column(name = "KPLAT3")
+	@Length(max = 50)
 	private String kplat3;
+	@Column(name = "DOR_R")
+	@Length(max = 5)
 	private String dorR;
+	@Column(name = "PLAT_R")
+	@Length(max = 145)
 	private String platR;
+	@Column(name = "PRIM_R")
+	@Length(max = 400)
 	private String primR;
+	@Column(name = "STRANA")
+	@Length(max = 2)
 	private String strana;
+	@Column(name = "FLAG",precision = 1)
+	@Max(9)
 	private byte flag;
+	@Column(name = "PRIM_R1")
+	@Length(max = 250)
     private String primR1;
+	@Column(name = "COD_DIR")
+	@Length(max = 2)
     private String codDir;
+	@Column(name = "COD_PER")
+	@Length(max = 4)
     private String codPer;
+	@Column(name = "NAME_PER")
+	@Length(max = 40)
     private String namePer;
+	@Column(name = "N_DOG")
+	@Length(max = 20)
     private String nDog;
+	@Column(name = "DAT_DOG")
     private Date datDog;
 
 	public CimSmgsPlatel() {
@@ -59,7 +95,7 @@ public class CimSmgsPlatel implements Serializable {
 	}
 
 	public CimSmgsPlatel(Long hid, CimSmgs cimSmgs, String dor,
-			String plat, String prim, Date dattr, Date locked, String unLock,
+			String plat, String prim,
             Byte sort, String kplat, String kplat1, String kplat2,
 			String kplat3, String dorR, String platR, String primR,
 			String strana, byte flag, String nDog, Date datDog) {
@@ -68,9 +104,6 @@ public class CimSmgsPlatel implements Serializable {
 		this.dor = dor;
 		this.plat = plat;
 		this.prim = prim;
-		this.dattr = dattr;
-		this.locked = locked;
-		this.unLock = unLock;
 		this.sort = sort;
 		this.kplat = kplat;
 		this.kplat1 = kplat1;
@@ -92,11 +125,9 @@ public class CimSmgsPlatel implements Serializable {
 	public void setHid(Long hid) {
 		this.hid = hid;
 	}
-//	@JsonBackReference
 	public CimSmgs getCimSmgs() {
 		return this.cimSmgs;
 	}
-//	@JsonBackReference
 	public void setCimSmgs(CimSmgs cimSmgs) {
 		this.cimSmgs = cimSmgs;
 	}
@@ -123,30 +154,6 @@ public class CimSmgsPlatel implements Serializable {
 
 	public void setPrim(String prim) {
 		this.prim = prim;
-	}
-
-	public Date getDattr() {
-		return this.dattr;
-	}
-
-	public void setDattr(Date dattr) {
-		this.dattr = dattr;
-	}
-
-	public Date getLocked() {
-		return this.locked;
-	}
-
-	public void setLocked(Date locked) {
-		this.locked = locked;
-	}
-
-	public String getUnLock() {
-		return this.unLock;
-	}
-
-	public void setUnLock(String unLock) {
-		this.unLock = unLock;
 	}
 
 	public Byte getSort() {
