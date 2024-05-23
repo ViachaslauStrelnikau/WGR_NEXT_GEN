@@ -81,7 +81,7 @@ public class CimSmgs implements Serializable {
     @Column(name = "G_12")
     @Length(max = 2)
     private String g12;
-    @Column(name = "G_12")
+    @Column(name = "G_13")
     @Length(max = 240)
     private String g13;
     @Column(name = "G_14_1")
@@ -862,7 +862,7 @@ public class CimSmgs implements Serializable {
     @Column(name = "VIZA_NO")
     @Length(max = 50)
     private String vizaNo;
-    @Column(name = "VIZA_NO")
+    @Column(name = "PEREVOZ_SIGN")
     @Length(max = 50)
     private String perevozSign;
     @Column(name = "PEREVOZ_DATE")
@@ -921,48 +921,120 @@ public class CimSmgs implements Serializable {
     @Column(name = "G_10_4")
     @Length(max = 64)
     private String g104;
+    @Column(name = "G_16_4")
+    @Length(max = 64)
     private String g164;
+    @Column(name = "n_poezd")
+    @Length(max = 32)
     private String npoezd;
+    @Column(name = "vag_PRIM")
+    @Length(max = 512)
     private String vagPrim;
+    @Column(name = "netto_pref")
+    @Length(max = 20)
     private String nettoPref;
+    @Column(name = "tara_Pref")
+    @Length(max = 20)
     private String taraPref;
+    @Column(name = "brutto_Pref")
+    @Length(max = 20)
     private String bruttoPref;
+    @Column(name = "kont_kol")
+    @Length(max = 20)
     private String kontKol;
+    @Column(name = "G_2_1")
+    @Length(max = 32)
     private String g2_1;
+    @Column(name = "G_5_1")
+    @Length(max = 32)
     private String g5_1;
+    @Column(name = "doc_type1")
     private BigDecimal docType1;
+    @Column(name = "PLAT")
+    @Length(max = 250)
     private String plat;
+    @Column(name = "PLAT1")
+    @Length(max = 250)
     private String plat1;
+    @Column(name = "GU")
+    @Max(99)
     private Byte gu;
+    @Column(name = "SBOR_CENNOST11")
+    @Length(max = 12)
     private String sborCennost11;
+    @Column(name = "SBOR_CENNOST21")
+    @Length(max = 12)
     private String sborCennost21;
+    @Column(name = "SBOR_CENNOST22")
+    @Length(max = 12)
     private String sborCennost22;
+    @Column(name = "FTS_NOMER")
+    @Length(max = 36)
     private String ftsNomer;
+    @Column(name = "FTS_STATUS")
+    @Max(99)
     private Byte ftsStatus = (byte) 0;
+    @Column(name = "zpu_Info1")
+    @Length(max = 50)
     private String zpuInfo1;
+    @Column(name = "INDEX_P")
+    @Length(max = 250)
     private String index_p;
+    @Column(name = "N_PPV")
+    @Length(max = 250)
     private String n_ppv;
+    @Column(name = "NPPR")
+    @Max(99)
     private Integer nppr;
+    @Column(name = "DPRB")
     private Date dprb;
+    @Column(name = "G_2INN")
+    @Length(max = 32)
     private String g_2inn;
+    @Column(name = "G_5INN")
+    @Length(max = 32)
     private String g_5inn;
-    @Column(name = "fts_docid")
+    @Column(name = "FTS_DOCID")
     @Length(max = 36)
     private String ftsDocId;
+    @Column(name = "G_24_BCN")
     private String g_24_bcn;
+    @Column(name = "G_36")
+    @Length(max = 5)
     private String g36;
+    @Column(name = "G_25_txt")
+    @Length(max = 10)
     private String g25Txt;
+    @Column(name = "G_2_")
+    @Length(max = 32)
     private String g2_;
+    @Column(name = "G_5_")
+    @Length(max = 32)
     private String g5_;
+    @Column(name = "n_packet")
+    @Length(max = 10)
     private String n_packet;
+    @Column(name = "G_7_")
+    @Length(max = 32)
     private String g7_;
+    @Column(name = "G_3_")
+    @Length(max = 32)
     private String g3_;
+    @Column(name = "SORT")
+    @Max(999)
     private Integer sort;
+    @Column(name = "KIND")
+    @Max(99)
     private Integer kind;
+    @Column(name = "send_br")
+    @Length(max = 1)
     private String send_br;
+    @Column(name = "SRC")
     private Character src;
+    @Column(name = "MESS_COUNT")
     private Long messCount;
-    private long newMessCount;
+    @Column(name = "BTS_NOMER")
+    @Length(max = 50)
     private String btsNomer;
 
     @OneToMany(fetch = FetchType.LAZY)
@@ -1072,14 +1144,6 @@ public class CimSmgs implements Serializable {
 
     public void setG_101(String g_101) {
         this.g_101 = g_101;
-    }
-
-    public long getNewMessCount() {
-        return newMessCount;
-    }
-
-    public void setNewMessCount(long newMessCount) {
-        this.newMessCount = newMessCount;
     }
 
     public Long getMessCount() {

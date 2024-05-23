@@ -1,8 +1,10 @@
 package com.example.WGR_hibernate6.model.cimsmgs;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Max;
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.annotations.Parameter;
+import org.hibernate.validator.constraints.Length;
 
 import java.util.Date;
 import java.util.Objects;
@@ -23,18 +25,38 @@ public class CimSmgsDanGruz {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "HID_GRUZ")
     private CimSmgsGruz cimSmgsGruz;
+    @Column(name = "CAR_D_NAME")
+    @Length(max = 256)
     private String carDName;
+    @Column(name = "CAR_D_NAME_DE")
+    @Length(max = 256)
     private String carDNameDe;
+    @Column(name = "COD_DANGER")
+    @Length(max = 32)
     private String codDanger;
+    @Column(name = "NUM_OON")
+    @Length(max = 32)
     private String numOon;
-
+    @Column(name = "DANG_SIGN")
+    @Length(max = 32)
     private String dangSign;
+    @Column(name = "GROUP_PACK")
+    @Length(max = 32)
     private String groupPack;
+    @Column(name = "EMERGEN_C")
+    @Length(max = 32)
     private String emergenC;
+    @Column(name = "STAMP_D_NAME")
+    @Length(max = 128)
     private String stampDName;
+    @Column(name = "DOP_INFO")
+    @Length(max = 512)
     private String dopInfo;
+    @Column(name = "CLASS")
+    @Length(max = 32)
     private String clazz;
-    private Date dattr;
+    @Column(name = "SORT", precision = 2)
+    @Max(99)
     private Byte sort;
 
     public Byte getSort() {
@@ -44,15 +66,6 @@ public class CimSmgsDanGruz {
     public void setSort(Byte sort) {
         this.sort = sort;
     }
-
-    public Date getDattr() {
-        return dattr;
-    }
-
-    public void setDattr(Date dattr) {
-        this.dattr = dattr;
-    }
-
     public CimSmgsDanGruz() {
     }
 
@@ -63,14 +76,12 @@ public class CimSmgsDanGruz {
         this.carDNameDe = carDNameDe;
         this.codDanger = codDanger;
         this.numOon = numOon;
-//        this.numOonDe = numOonDe;
         this.dangSign = dangSign;
         this.groupPack = groupPack;
         this.emergenC = emergenC;
         this.stampDName = stampDName;
         this.dopInfo = dopInfo;
         this.clazz = clazz;
-        this.dattr = dattr;
         this.sort = sort;
     }
 
@@ -121,14 +132,6 @@ public class CimSmgsDanGruz {
     public void setDangSign(String dangSign) {
         this.dangSign = dangSign;
     }
-
-    /*public String getNumOonDe() {
-        return numOonDe;
-    }
-
-    public void setNumOonDe(String numOonDe) {
-        this.numOonDe = numOonDe;
-    }*/
 
     public String getNumOon() {
         return numOon;
@@ -189,20 +192,18 @@ public class CimSmgsDanGruz {
                 Objects.equals(carDNameDe, that.carDNameDe) &&
                 Objects.equals(codDanger, that.codDanger) &&
                 Objects.equals(numOon, that.numOon) &&
-//                Objects.equals(numOonDe, that.numOonDe) &&
                 Objects.equals(dangSign, that.dangSign) &&
                 Objects.equals(groupPack, that.groupPack) &&
                 Objects.equals(emergenC, that.emergenC) &&
                 Objects.equals(stampDName, that.stampDName) &&
                 Objects.equals(dopInfo, that.dopInfo) &&
                 Objects.equals(clazz, that.clazz) &&
-                Objects.equals(dattr, that.dattr) &&
                 Objects.equals(sort, that.sort);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(hid, cimSmgsGruz != null ? cimSmgsGruz.getHid() : "", carDName, carDNameDe, codDanger, numOon, dangSign, groupPack, emergenC, stampDName, dopInfo, clazz, dattr, sort);
+        return Objects.hash(hid, cimSmgsGruz != null ? cimSmgsGruz.getHid() : "", carDName, carDNameDe, codDanger, numOon, dangSign, groupPack, emergenC, stampDName, dopInfo, clazz,  sort);
     }
 
     public StringBuilder danGruzRu4CimSmgsEu() {

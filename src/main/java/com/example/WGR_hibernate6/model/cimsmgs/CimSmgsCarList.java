@@ -3,9 +3,12 @@ package com.example.WGR_hibernate6.model.cimsmgs;
 import com.example.WGR_hibernate6.model.PackDoc;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Max;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.Parameter;
+import org.hibernate.validator.constraints.Length;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -32,50 +35,189 @@ public class CimSmgsCarList implements Serializable {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "HID_CS")
 	private CimSmgs cimSmgs;
+	@CreationTimestamp
 	private Date dattr;
-	private Date locked;
-	private String unLock;
+
+	@Column(name = "TRANS")
+	@Length(max = 20)
 	private String trans;
+	@Column(name = "UN")
+	@Length(max = 20)
 	private String un;
+	@Column(name = "ARCH")
+	@Length(max = 7)
 	private Date arch;
+	@Column(name = "NUM")
+	@Max(999)
 	private Short num;
+	@Column(name = "NVAG")
+	@Length(max = 160)
 	private String nvag;
+	@Column(name = "NHM_NAMES")
+	@Length(max = 512)
 	private String nhmNames;
+	@Column(name = "NHM_CODES")
+	@Length(max = 128)
 	private String nhmCodes;
+	@Column(name = "RID")
+	@Length(max = 9)
 	private Byte rid;
+	@Column(name = "PLOMBS")
+	@Length(max = 250)
 	private String plombs;
+	@Column(name = "MASS_SEND")
 	private Long massSend;
+	@Column(name = "MASS_CALC")
 	private Long massCalc;
+	@Column(name = "PRICE")
 	private Long price;
+	@Column(name = "PRICE_ADD")
 	private Long priceAdd;
+	@Column(name = "PRICE_ALL")
 	private Long priceAll;
+	@Column(name = "NOTES")
+	@Length(max = 80)
 	private String notes;
+	@Column(name = "G_13_1")
+	@Length(max = 160)
 	private String g131;
+	@Column(name = "G_13_2")
+	@Length(max = 160)
 	private String g132;
+	@Column(name = "G_13_2R")
+	@Length(max = 160)
 	private String g132r;
+	@Column(name = "G_13_3")
+	@Length(max = 64)
 	private String g133;
+	@Column(name = "G_13_4")
+	@Length(max = 128)
 	private String g134;
+	@Column(name = "G_13_5")
+	@Length(max = 160)
 	private String g135;
+	@Column(name = "G_13_6")
+	@Length(max = 250)
 	private String g136;
+	@Column(name = "G_13_6R")
+	@Length(max = 250)
 	private String g136r;
+	@Column(name = "G_13_7")
+	@Length(max = 250)
 	private String g137;
+	@Column(name = "G_13_7R")
+	@Length(max = 250)
 	private String g137r;
+	@Column(name = "G_13_8")
+	@Length(max = 128)
 	private String g138;
+	@Column(name = "G_13_9")
+	@Length(max = 160)
 	private String g139;
+	@Column(name = "G_13_9R")
+	@Length(max = 160)
 	private String g139r;
+	@Column(name = "G_13_10")
+	@Length(max = 64)
 	private String g1310;
+	@Column(name = "G_13_11")
+	@Length(max = 250)
 	private String g1311;
+	@Column(name = "G_13_11R")
+	@Length(max = 250)
 	private String g1311r;
+	@Column(name = "G_13_12")
+	@Length(max = 160)
 	private String g1312;
+	@Column(name = "G_13_13")
+	@Length(max = 160)
 	private String g1313;
+	@Column(name = "G_13_14")
+	@Length(max = 160)
 	private String g1314;
+	@Column(name = "G_13_14R")
+	@Length(max = 160)
 	private String g1314r;
+	@Column(name = "G_13_15")
+	@Length(max = 128)
 	private String g1315;
+	@Column(name = "G_13_16")
+	@Length(max = 128)
 	private String g1316;
+	@Column(name = "G_13_17")
+	@Length(max = 64)
 	private String g1317;
+	@Column(name = "G_13_17R")
+	@Length(max = 64)
 	private String g1317r;
+
+	@Column(name = "MASS_GROSS")
 	private Long massGross;
+	@Column(name = "TARA_VAG_PR")
 	private BigDecimal taraVagPr;
+	@Column(name = "SORT")
+	@Max(99)
+	private Byte sort;
+	@Column(name = "VED_POR_NOM")
+	@Max(99)
+	private Byte vedPorNom;
+	@Column(name = "KOD_SOB")
+	@Max(99)
+	private Byte kodSob;
+	@Column(name = "OTM_KSOB")
+	@Max(9)
+	private Byte otmKSob;
+	@Column(name = "GRPOD")
+	private BigDecimal grPod;
+	@Column(name = "TARA_VAG")
+	private BigDecimal taraVag;
+	@Column(name = "KOL_OS")
+	@Max(99)
+	private Byte kolOs;
+	@Column(name = "ROD")
+	@Length(max = 20)
+	private String rod;
+	@Column(name = "SPEED")
+	@Length(max = 20)
+	private String speed;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "HID_PACK")
+	private PackDoc packDoc;
+	@Column(name = "PRIM")
+	@Length(max = 250)
+	private String prim;
+	@Column(name = "COUNT")
+	private BigDecimal count;
+	@Column(name = "CICTERN_TYPE")
+	@Length(max = 24)
+	private String cicternType;
+	@Column(name = "SCEP")
+	@Max(9)
+	private Integer scep;
+	@Column(name = "REF_SEC_NO")
+	@Length(max = 24)
+	private String refSecNo;
+	@Column(name = "REF_SEC_KOL")
+	@Max(999)
+	private Integer refSecKol;
+	@Column(name = "VAG_OTM")
+	@Length(max = 1)
+	private String vagOtm;
+	@Column(name = "NAME_SOB")
+	@Length(max = 124)
+	private String nameSob;
+	@Column(name = "KLIENT_NAME")
+	@Length(max = 124)
+	private String klientName;
+	@Column(name = "KLIENT_NAME2")
+	@Length(max = 124)
+	private String klientName2;
+	@Column(name = "KLIENT_CODE")
+	@Length(max = 12)
+	private String klientCode;
+
+	@Transient
+	private boolean carDuplicates=false;
 
 	@OneToMany(fetch = FetchType.LAZY,mappedBy = "cimSmgsCarList")
 	@MapKeyColumn(name = "SORT")
@@ -89,31 +231,6 @@ public class CimSmgsCarList implements Serializable {
 	@OneToMany(fetch = FetchType.LAZY,mappedBy = "cimSmgsCarList")
 	@MapKeyColumn(name = "SORT")
     private Map<Integer, CimSmgsDocs> cimSmgsDocses9 = new TreeMap<>();
-
-	private Byte sort;
-	private Byte vedPorNom;
-	private Byte kodSob;
-	private Byte otmKSob;
-	private BigDecimal grPod;
-	private BigDecimal taraVag;
-	private Byte kolOs;
-    private String rod;
-    private String speed;
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "HID_PACK")
-	private PackDoc packDoc;
-    private String prim;
-    private BigDecimal count;
-	private String cicternType;
-	private Integer scep;
-	private String refSecNo;
-	private Integer refSecKol;
-	private String vagOtm;
-    private String nameSob;
-    private String klientName;
-    private String klientCode;
-    private boolean carDuplicates=false;
-	private String klientName2;
 
 	public String getKlientName2() {
 		return klientName2;
@@ -275,8 +392,6 @@ public class CimSmgsCarList implements Serializable {
 		this.kolOs = kolOs;
 		this.cimSmgs = cimSmgs;
 		this.dattr = dattr;
-		this.locked = locked;
-		this.unLock = unLock;
 		this.trans = trans;
 		this.un = un;
 		this.arch = arch;
@@ -346,22 +461,6 @@ public class CimSmgsCarList implements Serializable {
 
 	public void setDattr(Date dattr) {
 		this.dattr = dattr;
-	}
-
-	public Date getLocked() {
-		return this.locked;
-	}
-
-	public void setLocked(Date locked) {
-		this.locked = locked;
-	}
-
-	public String getUnLock() {
-		return this.unLock;
-	}
-
-	public void setUnLock(String unLock) {
-		this.unLock = unLock;
 	}
 
 	public String getTrans() {

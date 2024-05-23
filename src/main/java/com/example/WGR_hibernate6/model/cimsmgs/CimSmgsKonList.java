@@ -3,9 +3,13 @@ package com.example.WGR_hibernate6.model.cimsmgs;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Digits;
+import jakarta.validation.constraints.Max;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.hibernate.annotations.Parameter;
+import org.hibernate.annotations.UpdateTimestamp;
+import org.hibernate.validator.constraints.Length;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -17,109 +21,202 @@ import java.util.TreeMap;
 @Entity
 @Table(name = "cim_smgs_kon_list")
 public class CimSmgsKonList implements Serializable {
-	@Id
-	@org.hibernate.annotations.GenericGenerator(
-			name = "ID_GENERATOR_CIMSMGS_KON_LIST",
-			type = org.hibernate.id.enhanced.SequenceStyleGenerator.class,
-			parameters = {
-					@Parameter(name = "sequence_name", value = "CIMSMGS_KON_HID"),
-					@Parameter(name = "initial_value", value = "1")
-			}
-	)
-	private Long hid;
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "hid_car")
-	private CimSmgsCarList cimSmgsCarList;
-	private Date dattr;
-	private Date locked;
-	private String unLock;
-	private String trans;
-	private String un;
-	private Date arch;
-	private Short num;
-	private String nvag;
-	private String nhmNames;
-	private String nhmCodes;
-	private Byte rid;
-	private String plombs;
-	private BigDecimal massSend;
-	private BigDecimal massCalc;
-	private BigDecimal price;
-	private BigDecimal priceAdd;
-	private BigDecimal priceAll;
-	private String utiN;
-	private String utiType;
-	private String docSend;
-	private String notes;
-	private String g141;
-	private String g142;
-	private String g142r;
-	private String g146;
-	private String g149;
-	private String g149r;
-	private String g1410;
-//	Порядковы номер в ведомости
-	private Byte vedPorNom;
-
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "cimSmgsKonList")
-	@MapKeyColumn(name = "SORT")
+    @Id
+    @org.hibernate.annotations.GenericGenerator(
+            name = "ID_GENERATOR_CIMSMGS_KON_LIST",
+            type = org.hibernate.id.enhanced.SequenceStyleGenerator.class,
+            parameters = {
+                    @Parameter(name = "sequence_name", value = "CIMSMGS_KON_HID"),
+                    @Parameter(name = "initial_value", value = "1")
+            }
+    )
+    private Long hid;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "hid_car")
+    private CimSmgsCarList cimSmgsCarList;
+    @Column(name = "TRANS")
+    @Length(max = 20)
+    private String trans;
+    @Column(name = "UN")
+    @Length(max = 20)
+    private String un;
+    @Column(name = "ARCH")
+    private Date arch;
+    @Column(name = "NUM",precision = 3,scale = 0)
+    @Max(999)
+    private Short num;
+    @Column(name = "NVAG")
+    @Length(max = 16)
+    private String nvag;
+    @Column(name = "NHM_NAMES")
+    @Length(max = 512)
+    private String nhmNames;
+    @Column(name = "NHM_CODES")
+    @Length(max = 128)
+    private String nhmCodes;
+    @Column(name = "RID",precision = 1)
+    @Max(9)
+    private Byte rid;
+    @Column(name = "PLOMBS")
+    @Length(max = 250)
+    private String plombs;
+    @Column(name = "MASS_SEND")
+    private BigDecimal massSend;
+    @Column(name = "MASS_CALC")
+    private BigDecimal massCalc;
+    @Column(name = "PRICE")
+    private BigDecimal price;
+    @Column(name = "PRICE_ADD")
+    private BigDecimal priceAdd;
+    @Column(name = "PRICE_ALL")
+    private BigDecimal priceAll;
+    @Column(name = "UTI_N")
+    @Length(max = 16)
+    private String utiN;
+    @Column(name = "UTI_TYPE")
+    @Length(max = 16)
+    private String utiType;
+    @Column(name = "DOC_SEND")
+    @Length(max = 128)
+    private String docSend;
+    @Column(name = "NOTES")
+    @Length(max = 80)
+    private String notes;
+    @Column(name = "G_14_1")
+    @Length(max = 160)
+    private String g141;
+    @Column(name = "G_14_2")
+    @Length(max = 160)
+    private String g142;
+    @Column(name = "G_14_2R")
+    @Length(max = 160)
+    private String g142r;
+    @Column(name = "G_14_6")
+    @Length(max = 250)
+    private String g146;
+    @Column(name = "G_14_9")
+    @Length(max = 160)
+    private String g149;
+    @Column(name = "G_14_9R")
+    @Length(max = 160)
+    private String g149r;
+    @Column(name = "G_14_10")
+    @Length(max = 64)
+    private String g1410;
+    //	Порядковы номер в ведомости
+    @Column(name = "VED_POR_NOM",precision = 2)
+    @Max(99)
+    private Byte vedPorNom;
+    @Column(name = "SORT",precision = 2)
+    @Max(99)
+    private Byte sort;
+    @Column(name = "SIZE_MM")
+    private BigDecimal sizeMm;
+    @Column(name = "SIZE_FOOT")
+    private BigDecimal sizeFoot;
+    @Column(name = "KOD_SOB",precision = 2)
+    @Max(99)
+    private Byte kodSob;
+    @Column(name = "OTM_KSOB",precision = 2)
+    @Max(99)
+    private Byte otmKSob;
+    @Column(name = "TARA_KONT", length = 5)
+    private Short taraKont;
+    @Column(name = "VID")
+    @Length(max = 80)
+    private String vid;
+    @Column(name = "KAT")
+    @Length(max = 40)
+    private String kat;
+    @Column(name = "OWNER_KOD")
+    @Length(max = 10)
+    private String ownerKod;
+    @Column(name = "SPEC_KON")
+    @Length(max = 50)
+    private String specKon;
+    @Column(name = "POGR_KON",precision = 1)
+    @Max(9)
+    private Byte pogrKon;
+    @Column(name = "VVOZ")
+    private Date vvoz;
+    @Column(name = "POGRUZKA")
+    private Date pogruzka;
+    @Column(name = "ZAJAV_NO")
+    @Length(max = 50)
+    private String zajavNo;
+    @Column(name = "COUNT", length = 10)
+    private BigDecimal count;
+    @Column(name = "PRIVATE", precision = 1)
+    @Max(9)
+    private Byte privat;
+    @Column(name = "G_25")
+    @Length(max = 50)
+    private String g25;
+    @Column(name = "NETTO",precision = 12, scale = 2)
+    @Digits(integer = 10, fraction = 2)
+    private BigDecimal netto;
+    @Column(name = "netto_Suf")
+    @Length(max = 20)
+    private String nettoSuf;
+    @Column(name = "netto_pref")
+    @Length(max = 20)
+    private String nettoPref;
+    @Column(name = "TARA",precision = 12, scale = 2)
+    @Digits(integer = 10, fraction = 2)
+    private BigDecimal tara;
+    @Column(name = "tara_Pref")
+    @Length(max = 20)
+    private String taraPref;
+    @Column(name = "tara_Suf")
+    @Length(max = 20)
+    private String taraSuf;
+    @Column(name = "brutto",precision = 12, scale = 2)
+    @Digits(integer = 10, fraction = 2)
+    private BigDecimal brutto;
+    @Column(name = "brutto_Pref")
+    @Length(max = 20)
+    private String bruttoPref;
+    @Column(name = "brutto_Suf")
+    @Length(max = 20)
+    private String bruttoSuf;
+    @Column(name = "prim")
+    @Length(max = 512)
+    private String prim;
+    @Column(name = "GRPOD",precision = 8, scale = 3)
+    @Digits(integer = 5, fraction = 3)
+    private BigDecimal grpod;
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "cimSmgsKonList")
+    @MapKeyColumn(name = "SORT")
     private Map<Integer, CimSmgsGruz> cimSmgsGruzs = new TreeMap<>();
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "cimSmgsKonList")
-	@MapKeyColumn(name = "SORT")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "cimSmgsKonList")
+    @MapKeyColumn(name = "SORT")
     private Map<Integer, CimSmgsDocs> cimSmgsDocses9 = new TreeMap<>();
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "cimSmgsKonList")
-	@MapKeyColumn(name = "SORT")
-    private Map<Short,CimSmgsPlomb> cimSmgsPlombs = new TreeMap<>();
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "cimSmgsKonList")
+    @MapKeyColumn(name = "SORT")
+    private Map<Short, CimSmgsPlomb> cimSmgsPlombs = new TreeMap<>();
 
-	private Byte sort;
-	private BigDecimal sizeMm;
-	private BigDecimal sizeFoot;
-	private Byte kodSob;
-	private Byte otmKSob;
-	private Short taraKont;
-	private String vid;
-	private String kat;
-    private String ownerKod;
-    private String specKon;
-    private Byte pogrKon;
-    private Date vvoz;
-    private Date pogruzka;
-    private String zajavNo;
-    private BigDecimal count;
-    private Byte privat;
-    private String g25;
-    private BigDecimal netto;
-    private String nettoSuf;
-    private String nettoPref;
-    private BigDecimal tara;
-    private String taraPref;
-    private String taraSuf;
-    private BigDecimal brutto;
-    private String bruttoPref;
-    private String bruttoSuf;
-    private String prim;
-    private BigDecimal grpod;
-	private boolean konDuplicates=false;
+    @Transient
+    private boolean konDuplicates = false;
 
-	public Byte getVedPorNom() {
-		return vedPorNom;
-	}
 
-	public void setVedPorNom(Byte vedPorNom) {
-		this.vedPorNom = vedPorNom;
-	}
+    public Byte getVedPorNom() {
+        return vedPorNom;
+    }
 
-	public boolean isKonDuplicates() {
-		return konDuplicates;
-	}
+    public void setVedPorNom(Byte vedPorNom) {
+        this.vedPorNom = vedPorNom;
+    }
 
-	public void setKonDuplicates(boolean konDuplicates) {
-		this.konDuplicates = konDuplicates;
-	}
+    public boolean isKonDuplicates() {
+        return konDuplicates;
+    }
 
-	public BigDecimal getGrpod() {
+    public void setKonDuplicates(boolean konDuplicates) {
+        this.konDuplicates = konDuplicates;
+    }
+
+    public BigDecimal getGrpod() {
         return grpod;
     }
 
@@ -136,7 +233,7 @@ public class CimSmgsKonList implements Serializable {
         return cimSmgsPlombs;
     }
 
-    public void setCimSmgsPlombs(Map<Short,CimSmgsPlomb> cimSmgsPlombs) {
+    public void setCimSmgsPlombs(Map<Short, CimSmgsPlomb> cimSmgsPlombs) {
         this.cimSmgsPlombs = cimSmgsPlombs;
     }
 
@@ -293,385 +390,356 @@ public class CimSmgsKonList implements Serializable {
     }
 
     public CimSmgsKonList() {
-	}
-
-	public CimSmgsKonList(Long hid) {
-		this.hid = hid;
-	}
-
-	public CimSmgsKonList(Long hid, CimSmgsCarList cimSmgsCarList, Byte sort) {
-		this.hid = hid;
-		this.cimSmgsCarList = cimSmgsCarList;
-		this.sort = sort;
-	}
-
-	public CimSmgsKonList(Long hid, CimSmgsCarList cimSmgsCarList,
-	/* CimSmgs cimSmgs, */Date dattr, Date locked, String unLock, String trans, String un, Date arch, Short num, String nvag, String nhmNames,
-			String nhmCodes, Byte rid, String plombs, BigDecimal massSend, BigDecimal massCalc, BigDecimal price, BigDecimal priceAdd,
-			BigDecimal priceAll, String utiN, String utiType, String docSend, String notes, String g141, String g142, String g142r, String g146,
-			String g149, String g149r, String g1410, Map<Integer, CimSmgsGruz> cimSmgsGruzs, Byte sort, BigDecimal sizeMm, BigDecimal sizeFoot,
-			Byte kodSob, Byte otmKSob, Short taraKont, String vid, String kat) {
-		this.hid = hid;
-		this.cimSmgsCarList = cimSmgsCarList;
-		this.kodSob = kodSob;
-		this.otmKSob = otmKSob;
-		this.taraKont = taraKont;
-		// this.cimSmgs = cimSmgs;
-		this.sizeFoot = sizeFoot;
-		this.sizeMm = sizeMm;
-		this.dattr = dattr;
-		this.locked = locked;
-		this.unLock = unLock;
-		this.trans = trans;
-		this.un = un;
-		this.arch = arch;
-		this.num = num;
-		this.nvag = nvag;
-		this.nhmNames = nhmNames;
-		this.nhmCodes = nhmCodes;
-		this.rid = rid;
-		this.plombs = plombs;
-		this.massSend = massSend;
-		this.massCalc = massCalc;
-		this.price = price;
-		this.priceAdd = priceAdd;
-		this.priceAll = priceAll;
-		this.utiN = utiN;
-		this.utiType = utiType;
-		this.docSend = docSend;
-		this.notes = notes;
-		this.g141 = g141;
-		this.g142 = g142;
-		this.g142r = g142r;
-		this.g146 = g146;
-		this.g149 = g149;
-		this.g149r = g149r;
-		this.g1410 = g1410;
-		this.cimSmgsGruzs = cimSmgsGruzs;
-		this.sort = sort;
-		this.vid = vid;
-		this.kat = kat;
-	}
-
-	public Long getHid() {
-		return this.hid;
-	}
-
-	public void setHid(Long hid) {
-		this.hid = hid;
-	}
-
-	public CimSmgsCarList getCimSmgsCarList() {
-		return this.cimSmgsCarList;
-	}
-
-	public void setCimSmgsCarList(CimSmgsCarList cimSmgsCarList) {
-		this.cimSmgsCarList = cimSmgsCarList;
-	}
-
-
-	public Date getDattr() {
-		return this.dattr;
-	}
-
-	public void setDattr(Date dattr) {
-		this.dattr = dattr;
-	}
-
-	public Date getLocked() {
-		return this.locked;
-	}
-
-	public void setLocked(Date locked) {
-		this.locked = locked;
-	}
-
-	public String getUnLock() {
-		return this.unLock;
-	}
-
-	public void setUnLock(String unLock) {
-		this.unLock = unLock;
-	}
-
-	public String getTrans() {
-		return this.trans;
-	}
-
-	public void setTrans(String trans) {
-		this.trans = trans;
-	}
-
-	public String getUn() {
-		return this.un;
-	}
-
-	public void setUn(String un) {
-		this.un = un;
-	}
-
-	public Date getArch() {
-		return this.arch;
-	}
-
-	public void setArch(Date arch) {
-		this.arch = arch;
-	}
-
-	public Short getNum() {
-		return this.num;
-	}
-
-	public void setNum(Short num) {
-		this.num = num;
-	}
-
-	public String getNvag() {
-		return this.nvag;
-	}
-
-	public void setNvag(String nvag) {
-		this.nvag = nvag;
-	}
-
-	public String getNhmNames() {
-		return this.nhmNames;
-	}
-
-	public void setNhmNames(String nhmNames) {
-		this.nhmNames = nhmNames;
-	}
-
-	public String getNhmCodes() {
-		return this.nhmCodes;
-	}
-
-	public void setNhmCodes(String nhmCodes) {
-		this.nhmCodes = nhmCodes;
-	}
-
-	public Byte getRid() {
-		return this.rid;
-	}
-
-	public void setRid(Byte rid) {
-		this.rid = rid;
-	}
-
-	public String getPlombs() {
-		return this.plombs;
-	}
-
-	public void setPlombs(String plombs) {
-		this.plombs = plombs;
-	}
-
-	public BigDecimal getMassSend() {
-		return this.massSend;
-	}
-
-	public void setMassSend(BigDecimal massSend) {
-		this.massSend = massSend;
-	}
-
-	public BigDecimal getMassCalc() {
-		return this.massCalc;
-	}
-
-	public void setMassCalc(BigDecimal massCalc) {
-		this.massCalc = massCalc;
-	}
-
-	public BigDecimal getPrice() {
-		return this.price;
-	}
-
-	public void setPrice(BigDecimal price) {
-		this.price = price;
-	}
-
-	public BigDecimal getPriceAdd() {
-		return this.priceAdd;
-	}
-
-	public void setPriceAdd(BigDecimal priceAdd) {
-		this.priceAdd = priceAdd;
-	}
-
-	public BigDecimal getPriceAll() {
-		return this.priceAll;
-	}
-
-	public void setPriceAll(BigDecimal priceAll) {
-		this.priceAll = priceAll;
-	}
-
-	public String getUtiN() {
-		return this.utiN;
-	}
-
-	public void setUtiN(String utiN) {
-		this.utiN = utiN;
-	}
-
-	public String getUtiType() {
-		return this.utiType;
-	}
-
-	public void setUtiType(String utiType) {
-		this.utiType = utiType;
-	}
-
-	public String getDocSend() {
-		return this.docSend;
-	}
-
-	public void setDocSend(String docSend) {
-		this.docSend = docSend;
-	}
-
-	public String getNotes() {
-		return this.notes;
-	}
-
-	public void setNotes(String notes) {
-		this.notes = notes;
-	}
-
-	public String getG141() {
-		return this.g141;
-	}
-
-	public void setG141(String g141) {
-		this.g141 = g141;
-	}
-
-	public String getG142() {
-		return this.g142;
-	}
-
-	public void setG142(String g142) {
-		this.g142 = g142;
-	}
-
-	public String getG142r() {
-		return this.g142r;
-	}
-
-	public void setG142r(String g142r) {
-		this.g142r = g142r;
-	}
-
-	public String getG146() {
-		return this.g146;
-	}
-
-	public void setG146(String g146) {
-		this.g146 = g146;
-	}
-
-	public String getG149() {
-		return this.g149;
-	}
-
-	public void setG149(String g149) {
-		this.g149 = g149;
-	}
-
-	public String getG149r() {
-		return this.g149r;
-	}
-
-	public void setG149r(String g149r) {
-		this.g149r = g149r;
-	}
-
-	public String getG1410() {
-		return this.g1410;
-	}
-
-	public void setG1410(String g1410) {
-		this.g1410 = g1410;
-	}
-
-	public Map<Integer, CimSmgsGruz> getCimSmgsGruzs() {
-		return this.cimSmgsGruzs;
-	}
-
-	public Byte getSort() {
-		return sort;
-	}
-
-	public BigDecimal getSizeMm() {
-		return sizeMm;
-	}
-
-	public BigDecimal getSizeFoot() {
-		return sizeFoot;
-	}
-
-	public Byte getKodSob() {
-		return kodSob;
-	}
-
-	public Byte getOtmKSob() {
-		return otmKSob;
-	}
-
-	public Short getTaraKont() {
-		return taraKont;
-	}
-
-	public String getVid() {
-		return vid;
-	}
-
-	public String getKat() {
-		return kat;
-	}
-
-	@JsonManagedReference
-	public void setCimSmgsGruzs(Map<Integer, CimSmgsGruz> cimSmgsGruzs) {
-		this.cimSmgsGruzs = cimSmgsGruzs;
-	}
-
-	public void setSort(Byte sort) {
-		this.sort = sort;
-	}
-
-	public void setSizeMm(BigDecimal sizeMm) {
-		this.sizeMm = sizeMm;
-	}
-
-	public void setSizeFoot(BigDecimal sizeFoot) {
-		this.sizeFoot = sizeFoot;
-	}
-
-	public void setKodSob(Byte kodSob) {
-		this.kodSob = kodSob;
-	}
-
-	public void setOtmKSob(Byte otmKSob) {
-		this.otmKSob = otmKSob;
-	}
-
-	public void setTaraKont(Short taraKont) {
-		this.taraKont = taraKont;
-	}
-
-	public void setVid(String vid) {
-		this.vid = vid;
-	}
-
-	public void setKat(String kat) {
-		this.kat = kat;
-	}
-
-	public String toString() {
-		return new ToStringBuilder(this).append("hid", hid).append("name", nhmNames).toString();
-	}
-
-	public void addCimSmgsGruzs() {
+    }
+
+    public CimSmgsKonList(Long hid) {
+        this.hid = hid;
+    }
+
+    public CimSmgsKonList(Long hid, CimSmgsCarList cimSmgsCarList, Byte sort) {
+        this.hid = hid;
+        this.cimSmgsCarList = cimSmgsCarList;
+        this.sort = sort;
+    }
+
+    public CimSmgsKonList(Long hid, CimSmgsCarList cimSmgsCarList,
+            /* CimSmgs cimSmgs, */Date dattr, Date locked, String unLock, String trans, String un, Date arch, Short num, String nvag, String nhmNames,
+                          String nhmCodes, Byte rid, String plombs, BigDecimal massSend, BigDecimal massCalc, BigDecimal price, BigDecimal priceAdd,
+                          BigDecimal priceAll, String utiN, String utiType, String docSend, String notes, String g141, String g142, String g142r, String g146,
+                          String g149, String g149r, String g1410, Map<Integer, CimSmgsGruz> cimSmgsGruzs, Byte sort, BigDecimal sizeMm, BigDecimal sizeFoot,
+                          Byte kodSob, Byte otmKSob, Short taraKont, String vid, String kat) {
+        this.hid = hid;
+        this.cimSmgsCarList = cimSmgsCarList;
+        this.kodSob = kodSob;
+        this.otmKSob = otmKSob;
+        this.taraKont = taraKont;
+        this.sizeFoot = sizeFoot;
+        this.sizeMm = sizeMm;
+        this.trans = trans;
+        this.un = un;
+        this.arch = arch;
+        this.num = num;
+        this.nvag = nvag;
+        this.nhmNames = nhmNames;
+        this.nhmCodes = nhmCodes;
+        this.rid = rid;
+        this.plombs = plombs;
+        this.massSend = massSend;
+        this.massCalc = massCalc;
+        this.price = price;
+        this.priceAdd = priceAdd;
+        this.priceAll = priceAll;
+        this.utiN = utiN;
+        this.utiType = utiType;
+        this.docSend = docSend;
+        this.notes = notes;
+        this.g141 = g141;
+        this.g142 = g142;
+        this.g142r = g142r;
+        this.g146 = g146;
+        this.g149 = g149;
+        this.g149r = g149r;
+        this.g1410 = g1410;
+        this.cimSmgsGruzs = cimSmgsGruzs;
+        this.sort = sort;
+        this.vid = vid;
+        this.kat = kat;
+    }
+
+    public Long getHid() {
+        return this.hid;
+    }
+
+    public void setHid(Long hid) {
+        this.hid = hid;
+    }
+
+    public CimSmgsCarList getCimSmgsCarList() {
+        return this.cimSmgsCarList;
+    }
+
+    public void setCimSmgsCarList(CimSmgsCarList cimSmgsCarList) {
+        this.cimSmgsCarList = cimSmgsCarList;
+    }
+
+    public String getTrans() {
+        return this.trans;
+    }
+
+    public void setTrans(String trans) {
+        this.trans = trans;
+    }
+
+    public String getUn() {
+        return this.un;
+    }
+
+    public void setUn(String un) {
+        this.un = un;
+    }
+
+    public Date getArch() {
+        return this.arch;
+    }
+
+    public void setArch(Date arch) {
+        this.arch = arch;
+    }
+
+    public Short getNum() {
+        return this.num;
+    }
+
+    public void setNum(Short num) {
+        this.num = num;
+    }
+
+    public String getNvag() {
+        return this.nvag;
+    }
+
+    public void setNvag(String nvag) {
+        this.nvag = nvag;
+    }
+
+    public String getNhmNames() {
+        return this.nhmNames;
+    }
+
+    public void setNhmNames(String nhmNames) {
+        this.nhmNames = nhmNames;
+    }
+
+    public String getNhmCodes() {
+        return this.nhmCodes;
+    }
+
+    public void setNhmCodes(String nhmCodes) {
+        this.nhmCodes = nhmCodes;
+    }
+
+    public Byte getRid() {
+        return this.rid;
+    }
+
+    public void setRid(Byte rid) {
+        this.rid = rid;
+    }
+
+    public String getPlombs() {
+        return this.plombs;
+    }
+
+    public void setPlombs(String plombs) {
+        this.plombs = plombs;
+    }
+
+    public BigDecimal getMassSend() {
+        return this.massSend;
+    }
+
+    public void setMassSend(BigDecimal massSend) {
+        this.massSend = massSend;
+    }
+
+    public BigDecimal getMassCalc() {
+        return this.massCalc;
+    }
+
+    public void setMassCalc(BigDecimal massCalc) {
+        this.massCalc = massCalc;
+    }
+
+    public BigDecimal getPrice() {
+        return this.price;
+    }
+
+    public void setPrice(BigDecimal price) {
+        this.price = price;
+    }
+
+    public BigDecimal getPriceAdd() {
+        return this.priceAdd;
+    }
+
+    public void setPriceAdd(BigDecimal priceAdd) {
+        this.priceAdd = priceAdd;
+    }
+
+    public BigDecimal getPriceAll() {
+        return this.priceAll;
+    }
+
+    public void setPriceAll(BigDecimal priceAll) {
+        this.priceAll = priceAll;
+    }
+
+    public String getUtiN() {
+        return this.utiN;
+    }
+
+    public void setUtiN(String utiN) {
+        this.utiN = utiN;
+    }
+
+    public String getUtiType() {
+        return this.utiType;
+    }
+
+    public void setUtiType(String utiType) {
+        this.utiType = utiType;
+    }
+
+    public String getDocSend() {
+        return this.docSend;
+    }
+
+    public void setDocSend(String docSend) {
+        this.docSend = docSend;
+    }
+
+    public String getNotes() {
+        return this.notes;
+    }
+
+    public void setNotes(String notes) {
+        this.notes = notes;
+    }
+
+    public String getG141() {
+        return this.g141;
+    }
+
+    public void setG141(String g141) {
+        this.g141 = g141;
+    }
+
+    public String getG142() {
+        return this.g142;
+    }
+
+    public void setG142(String g142) {
+        this.g142 = g142;
+    }
+
+    public String getG142r() {
+        return this.g142r;
+    }
+
+    public void setG142r(String g142r) {
+        this.g142r = g142r;
+    }
+
+    public String getG146() {
+        return this.g146;
+    }
+
+    public void setG146(String g146) {
+        this.g146 = g146;
+    }
+
+    public String getG149() {
+        return this.g149;
+    }
+
+    public void setG149(String g149) {
+        this.g149 = g149;
+    }
+
+    public String getG149r() {
+        return this.g149r;
+    }
+
+    public void setG149r(String g149r) {
+        this.g149r = g149r;
+    }
+
+    public String getG1410() {
+        return this.g1410;
+    }
+
+    public void setG1410(String g1410) {
+        this.g1410 = g1410;
+    }
+
+    public Map<Integer, CimSmgsGruz> getCimSmgsGruzs() {
+        return this.cimSmgsGruzs;
+    }
+
+    public Byte getSort() {
+        return sort;
+    }
+
+    public BigDecimal getSizeMm() {
+        return sizeMm;
+    }
+
+    public BigDecimal getSizeFoot() {
+        return sizeFoot;
+    }
+
+    public Byte getKodSob() {
+        return kodSob;
+    }
+
+    public Byte getOtmKSob() {
+        return otmKSob;
+    }
+
+    public Short getTaraKont() {
+        return taraKont;
+    }
+
+    public String getVid() {
+        return vid;
+    }
+
+    public String getKat() {
+        return kat;
+    }
+
+    @JsonManagedReference
+    public void setCimSmgsGruzs(Map<Integer, CimSmgsGruz> cimSmgsGruzs) {
+        this.cimSmgsGruzs = cimSmgsGruzs;
+    }
+
+    public void setSort(Byte sort) {
+        this.sort = sort;
+    }
+
+    public void setSizeMm(BigDecimal sizeMm) {
+        this.sizeMm = sizeMm;
+    }
+
+    public void setSizeFoot(BigDecimal sizeFoot) {
+        this.sizeFoot = sizeFoot;
+    }
+
+    public void setKodSob(Byte kodSob) {
+        this.kodSob = kodSob;
+    }
+
+    public void setOtmKSob(Byte otmKSob) {
+        this.otmKSob = otmKSob;
+    }
+
+    public void setTaraKont(Short taraKont) {
+        this.taraKont = taraKont;
+    }
+
+    public void setVid(String vid) {
+        this.vid = vid;
+    }
+
+    public void setKat(String kat) {
+        this.kat = kat;
+    }
+
+    public String toString() {
+        return new ToStringBuilder(this).append("hid", hid).append("name", nhmNames).toString();
+    }
+
+    public void addCimSmgsGruzs() {
         CimSmgsCarList cimSmgsCarList = this.getCimSmgsCarList();
         for (CimSmgsGruz gruz : cimSmgsGruzs.values()) {
             int index = cimSmgsCarList.getCimSmgsGruzs().size();
@@ -681,15 +749,14 @@ public class CimSmgsKonList implements Serializable {
             cimSmgsCarList.getCimSmgsGruzs().put(index, gruz);
             gruz.addCimSmgsDanGruzs();
         }
-	}
+    }
 
     public void addCimSmgsGruzItem(CimSmgsGruz gruz) {
         if (gruz != null) {
-			gruz.setCimSmgsKonList(this);
+            gruz.setCimSmgsKonList(this);
             cimSmgsGruzs.put(gruz.getSort(), gruz);
         }
     }
-
 
 
     void addCimSmgsDocs9() {
@@ -724,42 +791,42 @@ public class CimSmgsKonList implements Serializable {
         }
     }
 
-	public void addCimSmgsPlombItem(CimSmgsPlomb plomb) {
-		if (plomb != null) {
-			plomb.setCimSmgsKonList(this);
-			cimSmgsPlombs.put(plomb.getSort(), plomb);
-		}
-	}
+    public void addCimSmgsPlombItem(CimSmgsPlomb plomb) {
+        if (plomb != null) {
+            plomb.setCimSmgsKonList(this);
+            cimSmgsPlombs.put(plomb.getSort(), plomb);
+        }
+    }
 
-	public void addCimSmgsDocsItem(CimSmgsDocs csd) {
-		if (csd != null) {
-			csd.setCimSmgsKonList(this);
-			if (csd.getSort() == null) {
-				csd.setSort(cimSmgsDocses9.size());
-			}
-			cimSmgsDocses9.put(csd.getSort(), csd);
-		}
-	}
+    public void addCimSmgsDocsItem(CimSmgsDocs csd) {
+        if (csd != null) {
+            csd.setCimSmgsKonList(this);
+            if (csd.getSort() == null) {
+                csd.setSort(cimSmgsDocses9.size());
+            }
+            cimSmgsDocses9.put(csd.getSort(), csd);
+        }
+    }
 
-	public String kon4CimSmgs() {
-		StringBuffer result = new StringBuffer("");
-		if (sizeFoot != null) {
-			result.append("1x");
-			result.append(sizeFoot);
-			result.append("HC Container №");
-		}
-		if (utiN != null && utiN.length() > 0) {
-			result.append("<br/>");
-			result.append(utiN);
-		}
-		if (sizeMm != null) {
-			result.append("<br/>");
-			result.append("(");
-			result.append(sizeMm);
-			result.append("mm)");
-		}
-		return result.toString();
-	}
+    public String kon4CimSmgs() {
+        StringBuffer result = new StringBuffer("");
+        if (sizeFoot != null) {
+            result.append("1x");
+            result.append(sizeFoot);
+            result.append("HC Container №");
+        }
+        if (utiN != null && utiN.length() > 0) {
+            result.append("<br/>");
+            result.append(utiN);
+        }
+        if (sizeMm != null) {
+            result.append("<br/>");
+            result.append("(");
+            result.append(sizeMm);
+            result.append("mm)");
+        }
+        return result.toString();
+    }
 
     public String kon4CimSmgs1() {
         StringBuffer result = new StringBuffer("");
@@ -768,13 +835,13 @@ public class CimSmgsKonList implements Serializable {
             result.append(sizeFoot);
         }
 
-        if (notes != null  && notes.length() > 0) {
+        if (notes != null && notes.length() > 0) {
             result.append(" ");
             result.append(notes);
         }
 
         if (utiN != null && utiN.length() > 0) {
-            String konConst = (notes != null  && notes.length() > 0) ? "" : "HC Container №";
+            String konConst = (notes != null && notes.length() > 0) ? "" : "HC Container №";
             result.append(" ");
             result.append(konConst);
             result.append("\n");
@@ -790,11 +857,11 @@ public class CimSmgsKonList implements Serializable {
     }
 
 
-    public String gruzyPrintCmr(){
+    public String gruzyPrintCmr() {
         StringBuilder sb = new StringBuilder();
         String nl = "<br/>";
         String prefix = "";
-        for(CimSmgsGruz gruz: getCimSmgsGruzs().values()){
+        for (CimSmgsGruz gruz : getCimSmgsGruzs().values()) {
             sb.append(prefix);
             prefix = "<br/>";
             sb.append(gruz.getNzgr() != null ? gruz.getNzgr() + nl : "");
@@ -807,11 +874,11 @@ public class CimSmgsKonList implements Serializable {
         return sb.toString();
     }
 
-    public String gruzyPrintCmr1(){
+    public String gruzyPrintCmr1() {
         StringBuilder sb = new StringBuilder();
         String nl = "\n";
         String prefix = "";
-        for(CimSmgsGruz gruz: getCimSmgsGruzs().values()){
+        for (CimSmgsGruz gruz : getCimSmgsGruzs().values()) {
             sb.append(prefix);
             prefix = "/n";
             sb.append(gruz.getNzgr() != null ? gruz.getNzgr() + nl : "");
@@ -836,7 +903,7 @@ public class CimSmgsKonList implements Serializable {
         StringBuilder sb = new StringBuilder();
         sb.append(sizeFoot != null ? "1x" + sizeFoot : "");
 
-        if(StringUtils.isNotBlank(utiN)) {
+        if (StringUtils.isNotBlank(utiN)) {
             sb.append(StringUtils.isNotBlank(notes) ? " " + notes : "");
             sb.append(" Container № ");
             sb.append(utiN);
@@ -849,60 +916,57 @@ public class CimSmgsKonList implements Serializable {
         return sb.toString();
     }
 
-    public void parseAndAddPlombsFromString(String znak)
-	{
-		String[] znaks;
-		if(znak.split(",").length>znak.split(";").length)
-			znaks =znak.split(",") ;
-		else
-			znaks =znak.split(";");
+    public void parseAndAddPlombsFromString(String znak) {
+        String[] znaks;
+        if (znak.split(",").length > znak.split(";").length)
+            znaks = znak.split(",");
+        else
+            znaks = znak.split(";");
 
-		this.addPlombsFromZnakArray(znaks);
-	}
+        this.addPlombsFromZnakArray(znaks);
+    }
 
-	public void addPlombsFromZnakArray(String[] znaks)
-	{
-		for (String znak:znaks) {
+    public void addPlombsFromZnakArray(String[] znaks) {
+        for (String znak : znaks) {
 
-			if(znak!=null&&!znak.trim().isEmpty()) {
-				CimSmgsPlomb plomb = new CimSmgsPlomb();
-				plomb.setZnak(znak);
-				plomb.setKpl((short) 1);
-				plomb.setSort((short) getCimSmgsPlombs().size());
+            if (znak != null && !znak.trim().isEmpty()) {
+                CimSmgsPlomb plomb = new CimSmgsPlomb();
+                plomb.setZnak(znak);
+                plomb.setKpl((short) 1);
+                plomb.setSort((short) getCimSmgsPlombs().size());
 
-				this.addCimSmgsPlombItem(plomb);
-			}
-		}
-	}
-	public void clearPlombs()
-	{
-		if(getCimSmgsCarList()!=null&&getCimSmgsCarList().getCimSmgs()!=null)
-		{
-			getCimSmgsCarList().getCimSmgsPlombs().clear();
-			getCimSmgsCarList().getCimSmgs().getCimSmgsPlombs().clear();
-		}
-		getCimSmgsPlombs().clear();
-	}
+                this.addCimSmgsPlombItem(plomb);
+            }
+        }
+    }
 
-	public BigDecimal calcMassSend() {
-    	return cimSmgsGruzs
-				.values()
-				.stream()
-				.map(CimSmgsGruz::getMassa)
-				.filter(Objects::nonNull)
-				.reduce(BigDecimal::add)
-				.orElse(BigDecimal.ZERO);
-	}
+    public void clearPlombs() {
+        if (getCimSmgsCarList() != null && getCimSmgsCarList().getCimSmgs() != null) {
+            getCimSmgsCarList().getCimSmgsPlombs().clear();
+            getCimSmgsCarList().getCimSmgs().getCimSmgsPlombs().clear();
+        }
+        getCimSmgsPlombs().clear();
+    }
 
-	public Integer calcPlaces() {
-    	return cimSmgsGruzs
-				.values()
-				.stream()
-				.map(CimSmgsGruz::getPlaces)
-				.filter(Objects::nonNull)
-				.reduce(Integer::sum)
-				.orElse(null);
-	}
+    public BigDecimal calcMassSend() {
+        return cimSmgsGruzs
+                .values()
+                .stream()
+                .map(CimSmgsGruz::getMassa)
+                .filter(Objects::nonNull)
+                .reduce(BigDecimal::add)
+                .orElse(BigDecimal.ZERO);
+    }
+
+    public Integer calcPlaces() {
+        return cimSmgsGruzs
+                .values()
+                .stream()
+                .map(CimSmgsGruz::getPlaces)
+                .filter(Objects::nonNull)
+                .reduce(Integer::sum)
+                .orElse(null);
+    }
 
     @Override
     public boolean equals(Object o) {
